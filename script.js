@@ -22,6 +22,8 @@ function playRound(playerSelection, computerSelection) {
 //verify that rules work
 //make playerselection's string input is case INSENSITIVE.
 
+
+
     if(playerSelection === "rock"){
         if(computerSelection === "paper") {
             losses++;
@@ -69,18 +71,26 @@ function game() {
 //track the score - wins, losses, ties into separate variables. Maybe use a scoreTracker function?
 //At the end of 5 rounds, output the score and whether user wins or loses.
 
-    let playerSelection = '';
-    let computerSelection = '';
+    
+    
+   
+   // playerSelection = prompt("Please choose: Rock, Paper, or Scissors:").toLowerCase();
+   
+   // console.log(playRound(playerSelection, computerSelection));
+
+   let buttons = document.querySelectorAll("input[type='button']");
+   for(let button of buttons){
+       button.addEventListener("click", (event) => {
+        let playerSelection = event.target.value.toLowerCase();
+        let computerSelection= computerPlay();
+        console.log(playRound(playerSelection, computerSelection));
+        outputResults();
+           
+       });
+   }
     
 
-    for(let i=1; i <=5 ; i++){
-        playerSelection = prompt("Please choose: Rock, Paper, or Scissors:").toLowerCase();
-        computerSelection= computerPlay();
-        console.log(playRound(playerSelection, computerSelection));
-    }
-
-    outputResults();
-
+    
 }
 
 function outputResults() {
