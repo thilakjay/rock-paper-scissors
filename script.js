@@ -60,7 +60,7 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game() {
+function game(event) {
 //Call one of the previous functions to play 5 rounds. Keep the score
 //and output the results and the winner/loser.
 // *******************
@@ -78,31 +78,60 @@ function game() {
    
    // console.log(playRound(playerSelection, computerSelection));
 
-   let buttons = document.querySelectorAll("input[type='button']");
-   for(let button of buttons){
-       button.addEventListener("click", (event) => {
+   
+
         let playerSelection = event.target.value.toLowerCase();
         let computerSelection= computerPlay();
-        console.log(playRound(playerSelection, computerSelection));
+        let divResult = document.createElement("div");
+        divResult.textContent = playRound(playerSelection, computerSelection);
+        document.body.appendChild(divResult);
+
+        if(wins === 5) {
+            divResult.textContent = "You are the official winner!";
+            document.body.appendChild(divResult);
+            for(let button of buttons){
+                button.removeEventListener("click", game);
+            }
+
+        }else if(losses === 5) {
+            divResult.textContent = "Computer Wins! You lose...";
+            document.body.appendChild(divResult);
+            for(let button of buttons){
+                button.removeEventListener("click", game);
+            }
+        }
+
         outputResults();
            
-       });
-   }
+       
+   
     
 
     
 }
 
 function outputResults() {
-    console.log(`You have ${wins} wins, ${losses} losses, and ${ties} ties.`);
-    if(wins > losses && wins > ties){
-        console.log("You WIN!");
-    }else{
-        console.log("You didn't rack up enough wins. You LOSE!");
-    }
+    // console.log(`You have ${wins} wins, ${losses} losses, and ${ties} ties.`);
+    // if(wins > losses && wins > ties){
+    //     console.log("You WIN!");
+    // }else{
+    //     console.log("You didn't rack up enough wins. You LOSE!");
+    // }
+
+    
+    
 }
 
 let wins = 0;
 let losses = 0;
 let ties = 0;
-game();
+let finalScoreMessage = "";
+
+let buttons = document.querySelectorAll("input[type='button']");
+
+for(let button of buttons){
+    button.addEventListener("click", game);
+}
+
+
+
