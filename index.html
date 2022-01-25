@@ -2,13 +2,33 @@
 <html>
     <head>
         <title>Rock Paper Scissors</title>
-        
+        <link rel="stylesheet" href="styles.css">
     </head>
 
     <body>
-        <input type="button" value="Rock">
-        <input type="button" value="Paper">
-        <input type="button" value="Scissors">
+        <div id="title"><img class="logo" src="img/rpslogo.png"></div>
+
+        <div id="selections">
+            <div class="label">
+                <div>USER</div>
+                <div id="user-selection" class="selection"><img id="user-choice" src="img/rock.jpg"></div>
+                <div id="user-score" class="score">5</div>
+            </div>
+
+            <div class="label"><img src="img/versus.png"></div>
+
+            <div class="label">
+                <div>COMPUTER</div>
+                <div id="computer-selection" class="selection"><img id="cpu-choice" src="img/paper.jpg"></div>
+                <div id="computer-score" class="score">4</div>
+            </div>
+        </div>
+
+        <div id="buttons">
+            <div class="box"><input type="image" value="rock" src="img/rock.jpg"></div>
+            <div class="box"><input type="image" value="paper"src="img/paper.jpg"></div>
+            <div class="box"><input type="image" value="scissors"src="img/scissors.jpg"></div>  
+        </div>
 
         <script src="script.js" defer></script>
     </body>

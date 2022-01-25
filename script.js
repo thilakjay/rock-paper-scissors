@@ -1,8 +1,4 @@
 function computerPlay() {
-    //generate a random number between 1 and 3 and store in variable
-    //if number is 1 = rock, 2 = scissors, 3=paper
-    //return the result
-    //test to ensure randomness
 
     let randomNumber = Math.floor(Math.random()*3+1);
     let result = "";
@@ -15,15 +11,8 @@ function computerPlay() {
 }
 
 function playRound(playerSelection, computerSelection) {
-//check if player's selection beats/loses against computer
-//if rock, check if it beats against the others
-//return a string declaring win or lose, and the overall result
-//do the same as above, but with paper, and scissors. 
-//verify that rules work
-//make playerselection's string input is case INSENSITIVE.
 
-
-
+    //REFACTOR: some of these conditionals can be merged with || operator
     if(playerSelection === "rock"){
         if(computerSelection === "paper") {
             losses++;
@@ -61,27 +50,13 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game(event) {
-//Call one of the previous functions to play 5 rounds. Keep the score
-//and output the results and the winner/loser.
-// *******************
-//Use a loop (or repeat the function) to play 5 rounds.
-//Ask the user for his input at the beginning of each round, while setting computer selection
-
-//output the result of each round 
-//track the score - wins, losses, ties into separate variables. Maybe use a scoreTracker function?
-//At the end of 5 rounds, output the score and whether user wins or loses.
-
     
-    
-   
-   // playerSelection = prompt("Please choose: Rock, Paper, or Scissors:").toLowerCase();
-   
-   // console.log(playRound(playerSelection, computerSelection));
-
-   
-
-        let playerSelection = event.target.value.toLowerCase();
+        let playerSelection = event.target.value;
         let computerSelection= computerPlay();
+        //selections made, time to assign respective images to selection
+        //make a function for this?
+        showSelections(playerSelection, computerSelection);
+
         let divResult = document.createElement("div");
         divResult.textContent = playRound(playerSelection, computerSelection);
         document.body.appendChild(divResult);
@@ -104,22 +79,17 @@ function game(event) {
         outputResults();
            
        
-   
+ function showSelections(pChoice, cChoice) {
+     document.getElementById("user-choice").src = `img/${pChoice}.jpg`;
+     document.getElementById("cpu-choice").src = `img/${cChoice}.jpg`;
+ }  
     
 
     
 }
 
 function outputResults() {
-    // console.log(`You have ${wins} wins, ${losses} losses, and ${ties} ties.`);
-    // if(wins > losses && wins > ties){
-    //     console.log("You WIN!");
-    // }else{
-    //     console.log("You didn't rack up enough wins. You LOSE!");
-    // }
 
-    
-    
 }
 
 let wins = 0;
@@ -127,11 +97,18 @@ let losses = 0;
 let ties = 0;
 let finalScoreMessage = "";
 
-let buttons = document.querySelectorAll("input[type='button']");
+let playerWins = 0;
+let computerWins = 0;
+
+let buttons = document.querySelectorAll("input[type='image']");
 
 for(let button of buttons){
     button.addEventListener("click", game);
 }
 
-
-
+//add div below 'fight' section - describe selection and winner.
+//score scounter for cpu and player
+//Update Title (add effects)
+//Update font
+//animate the buttons (grows on hover)
+//refactor code, including CSS
