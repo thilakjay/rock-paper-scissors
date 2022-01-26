@@ -1,3 +1,16 @@
+let pScore = 0;
+let cScore = 0;
+
+let roundText = document.getElementById("round-description");
+let pScoreBoard = document.getElementById("player-score");
+let cScoreBoard = document.getElementById("computer-score");
+
+let buttons = document.querySelectorAll("input[type='image']");
+
+for(let button of buttons){
+    button.addEventListener("click", game);
+}
+
 function computerPlay() {
 
     let randomNumber = Math.floor(Math.random()*3+1);
@@ -10,40 +23,37 @@ function computerPlay() {
     return result;
 }
 
-function playRound(playerSelection, computerSelection) {
+function playRound(pSelection, cSelection) {
 
     //REFACTOR: some of these conditionals can be merged with || operator
-    if(playerSelection === "rock"){
-        if(computerSelection === "paper") {
-            losses++;
+    if(pSelection === "rock"){
+        if(cSelection === "paper") {
+            cScore++;
             return "You Lose! Paper beats Rock!";
-        }else if(computerSelection === "scissors") {
-            wins++;
+        }else if(cSelection === "scissors") {
+            pScore++;
             return "You Win! Rock beats Scissors!";
         }else {
-            ties++;
             return "Tie! Rock and Rock!";
         }
-    }else if(playerSelection === "paper"){
-        if(computerSelection === "rock") {
-            wins++;
+    }else if(pSelection === "paper"){
+        if(cSelection === "rock") {
+            pScore++;
             return "You Win! Paper beats Rock!";
-        }else if(computerSelection === "scissors") {
-            losses++;
+        }else if(cSelection === "scissors") {
+            cScore++;
             return "You Lose! Scissors beats Paper!";
         }else {
-            ties++;
             return "Tie! Paper and Paper!";
         }
     }else{ //if player selects scissors
-        if(computerSelection === "rock") {
-            losses++;
+        if(cSelection === "rock") {
+            cScore++;
             return "You Lose! Rock beats Scissors!";
-        }else if(computerSelection === "paper") {
-            wins++;
+        }else if(cSelection === "paper") {
+            pScore++;
             return "You Win! Scissors beats Paper!";
         }else {
-            ties++;
             return "Tie! Scissors and Scissors!";
         }
     }
@@ -51,64 +61,49 @@ function playRound(playerSelection, computerSelection) {
 
 function game(event) {
     
-        let playerSelection = event.target.value;
-        let computerSelection= computerPlay();
-        //selections made, time to assign respective images to selection
-        //make a function for this?
-        showSelections(playerSelection, computerSelection);
+        let pSelection = event.target.value;
+        let cSelection= computerPlay();
 
-        let divResult = document.createElement("div");
-        divResult.textContent = playRound(playerSelection, computerSelection);
-        document.body.appendChild(divResult);
+        document.getElementById("player-choice").src = `img/${pSelection}.jpg`;
+        document.getElementById("computer-choice").src = `img/${cSelection}.jpg`;
+        
 
-        if(wins === 5) {
-            divResult.textContent = "You are the official winner!";
-            document.body.appendChild(divResult);
-            for(let button of buttons){
-                button.removeEventListener("click", game);
-            }
+        roundText.innerText = playRound(pSelection, cSelection);
+        pScoreBoard.innerText = pScore;
+        cScoreBoard.innerText = cScore;
 
-        }else if(losses === 5) {
-            divResult.textContent = "Computer Wins! You lose...";
-            document.body.appendChild(divResult);
-            for(let button of buttons){
-                button.removeEventListener("click", game);
-            }
+        if(pScore === 5) {
+            roundText.textContent = "You are the winner!";
+            resetGame();
+
+        }else if(cScore === 5) {
+            roundText.textContent = "Computer Wins! You lose...";
+            resetGame();
+        }   
+}
+
+function resetGame() {
+    if(confirm("Play again?")){
+        //reset 'hands'
+        document.getElementById("player-choice").src = `img/question.png`;
+        document.getElementById("computer-choice").src = `img/question.png`;
+        //reset score
+        pScore = 0;
+        cScore = 0;
+        pScoreBoard.innerText = pScore;
+        cScoreBoard.innerText = cScore;
+        //reset score description
+        roundText.innerText = "Pick a hand!"
+        
+    }else {
+        for(let button of buttons){
+            button.removeEventListener("click", game);
         }
-
-        outputResults();
-           
-       
- function showSelections(pChoice, cChoice) {
-     document.getElementById("user-choice").src = `img/${pChoice}.jpg`;
-     document.getElementById("cpu-choice").src = `img/${cChoice}.jpg`;
- }  
-    
-
-    
+        return;
+    }
 }
 
-function outputResults() {
 
-}
-
-let wins = 0;
-let losses = 0;
-let ties = 0;
-let finalScoreMessage = "";
-
-let playerWins = 0;
-let computerWins = 0;
-
-let buttons = document.querySelectorAll("input[type='image']");
-
-for(let button of buttons){
-    button.addEventListener("click", game);
-}
-
-//add div below 'fight' section - describe selection and winner.
-//score scounter for cpu and player
-//Update Title (add effects)
-//Update font
-//animate the buttons (grows on hover)
-//refactor code, including CSS
+//refactor javascript
+//refactor CSS
+//polish up UI/html
