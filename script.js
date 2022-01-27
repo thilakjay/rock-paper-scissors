@@ -4,7 +4,6 @@ let cScore = 0;
 let roundText = document.getElementById("round-description");
 let pScoreBoard = document.getElementById("player-score");
 let cScoreBoard = document.getElementById("computer-score");
-
 let buttons = document.querySelectorAll("input[type='image']");
 
 for(let button of buttons){
@@ -25,7 +24,6 @@ function computerPlay() {
 
 function playRound(pSelection, cSelection) {
 
-    //REFACTOR: some of these conditionals can be merged with || operator
     if(pSelection === "rock"){
         if(cSelection === "paper") {
             cScore++;

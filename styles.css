@@ -4,38 +4,34 @@ body {
     flex-direction: column;
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
-  /*  border: 2px solid red; */
-}
-
-#title {    
-    font-size: 36px;
+    font-size: 25px;
     font-weight: bold;
-    margin-bottom: 50px;
     color: rgb(255, 105, 243);
-  /*  border: 2px solid pink; */
 }
 
-#selections {
+#logo {    
+    width: 800px;
+    margin-bottom: 50px; 
+}
+
+#battle-area {
     display: flex;
     width: 67%;
     min-height: 284px;
     justify-content: space-evenly;
     margin-bottom: 50px;
-  /*  border: 2px solid blue; */
 }
 
 .selection {
     flex: 1;
     display: flex;
- /*   border: 1px green solid; */
 }
 
-.label {
+.area {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  /*  border: 1px black solid; */
 }
 
 img{
@@ -43,8 +39,26 @@ img{
     align-self: center;
 }
 
-.logo {
-    width: 800px;
+#buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 33%;  
+}
+
+.hands {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    flex: 1;
+}
+
+#round-description, .score, .title {
+    min-height: 25px;
+}
+
+#round-description {
+    margin-bottom: 50px;
 }
 
 input {
@@ -54,32 +68,4 @@ input {
 
 input:hover {
     transform: scale(1.2);
-}
-
-#buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 33%;
-/*    border: 2px solid black; */
-    
-}
-
-.box {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    flex: 1;
- /*   border: 2px solid gray; */
-}
-
-#round-description, .score, .title {
-    font-size: 25px;
-    min-height: 25px;
-    font-weight: bold;
-    color:rgb(245, 8, 225);
-}
-
-#round-description {
-    margin-bottom: 50px;
 }
